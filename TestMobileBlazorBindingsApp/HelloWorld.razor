@@ -1,0 +1,29 @@
+﻿<ContentView Padding="new Thickness(20)">
+    <StackLayout Margin="new Thickness(20)" VerticalOptions="LayoutOptions.Center">
+
+        <Label Text="Hello, SAFE Network!"
+               FontSize="20"
+               HorizontalTextAlignment="TextAlignment.Center" />
+
+        <Button Text="Check" OnClick="@CheckLibType" />
+
+        <Label Text="@("Native Lib Type :  " + libType)"
+               FontAttributes="FontAttributes.Bold"
+               VerticalTextAlignment="TextAlignment.Center"
+               HorizontalTextAlignment="TextAlignment.Center"
+               TextColor="@color"/>
+
+    </StackLayout>
+</ContentView>
+
+@code
+{
+    string libType = "Not checked yet";
+    Color color = Color.DarkGray;
+
+    void CheckLibType()
+    {
+        libType = SafeApp.Session.IsMockBuild() ? "Dev" : "Prod" ;
+        color = SafeApp.Session.IsMockBuild() ? Color.Blue : Color.Green;
+    }
+}
